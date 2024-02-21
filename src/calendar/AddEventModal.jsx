@@ -16,7 +16,7 @@ export default function AddEventModal({ isOpen, closeModal, onEventAdded }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if(title === ''){
+        if (title === '') {
             return toast.error('Please enter a title!')
         }
         onEventAdded({
@@ -28,75 +28,57 @@ export default function AddEventModal({ isOpen, closeModal, onEventAdded }) {
 
     }
     return (
-        // <Modal isOpen={isOpne} onRequestClose={onClose}>
-        //     <form onSubmit={onSubmit}>
-        //         <input type='text' placeholder='title....' onChange={() => setTitle(event.target.value)} />
-        //         <div>
-        //             <label>Start Date</label>
-        //             <Datetime value={start} onChange={date => setStart(date)} />
-        //         </div>
-        //         <div>
-        //             <label>End Date</label>
-        //             <Datetime value={end} onChange={date => setEnd(date)} />
-        //         </div>
-        //         <button>Add Event</button>
-        //     </form>
-        // </Modal>
         <>
+            <Transition appear show={isOpen} as={Fragment}>
+                <Dialog as="div" className="relative" onClose={closeModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-black/25" />
+                    </Transition.Child>
 
-            <>
+                    <div className="fixed inset-0 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
+                            >
+                                <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
 
-                <Transition appear show={isOpen} as={Fragment}>
-                    <Dialog as="div" className="relative" onClose={closeModal}>
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                        >
-                            <div className="fixed inset-0 bg-black/25" />
-                        </Transition.Child>
-
-                        <div className="fixed inset-0 overflow-y-auto">
-                            <div className="flex min-h-full items-center justify-center p-4 text-center">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0 scale-95"
-                                    enterTo="opacity-100 scale-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100 scale-100"
-                                    leaveTo="opacity-0 scale-95"
-                                >
-                                    <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
-
-                                        <form onSubmit={onSubmit} className='space-y-5'>
+                                    <form onSubmit={onSubmit} className='space-y-5'>
+                                        <div>
+                                            <label className='font-bold'>Write Rutine Title</label>
                                             <div>
-                                                <label className='font-bold'>Write Rutine Title</label>
-                                                <div>
-                                                    <input type='text' placeholder='Title....' onChange={() => setTitle(event.target.value)} className='w-full mt-2' />
-                                                </div>
+                                                <input type='text' placeholder='Title....' onChange={() => setTitle(event.target.value)} className='w-full mt-2' />
                                             </div>
-                                            <div>
-                                                <label className='font-bold'>Start Date</label>
-                                                <Datetime value={start} onChange={date => setStart(date)} className='w-full mt-2' />
-                                            </div>
-                                            <div>
-                                                <label className='font-bold'>End Date</label>
-                                                <Datetime value={end} onChange={date => setEnd(date)} className='w-full mt-2' />
-                                            </div>
-                                            <button className='px-5 py-2 bg-green-700 text-white hover:text-black w-full rounded'>Add Event</button>
-                                        </form>
-                                    </Dialog.Panel>
-                                </Transition.Child>
-                            </div>
+                                        </div>
+                                        <div>
+                                            <label className='font-bold'>Start Date</label>
+                                            <Datetime value={start} onChange={date => setStart(date)} className='w-full mt-2' />
+                                        </div>
+                                        <div>
+                                            <label className='font-bold'>End Date</label>
+                                            <Datetime value={end} onChange={date => setEnd(date)} className='w-full mt-2' />
+                                        </div>
+                                        <button className='px-5 py-2 bg-green-700 text-white hover:text-black w-full rounded'>Add Event</button>
+                                    </form>
+                                </Dialog.Panel>
+                            </Transition.Child>
                         </div>
-                    </Dialog>
-                </Transition>
-            </>
+                    </div>
+                </Dialog>
+            </Transition>
         </>
     )
 }
