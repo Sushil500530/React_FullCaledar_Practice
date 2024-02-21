@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Datetime from 'react-datetime';
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import toast from 'react-hot-toast';
 
 
 export default function AddEventModal({ isOpen, closeModal, onEventAdded }) {
@@ -15,6 +16,9 @@ export default function AddEventModal({ isOpen, closeModal, onEventAdded }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        if(title === ''){
+            return toast.error('Please enter a title!')
+        }
         onEventAdded({
             title,
             start,
@@ -70,14 +74,19 @@ export default function AddEventModal({ isOpen, closeModal, onEventAdded }) {
                                     <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
 
                                         <form onSubmit={onSubmit} className='space-y-5'>
-                                            <input type='text' placeholder='title....' onChange={() => setTitle(event.target.value)} />
                                             <div>
-                                                <label>Start Date</label>
-                                                <Datetime value={start} onChange={date => setStart(date)} />
+                                                <label className='font-bold'>Write Rutine Title</label>
+                                                <div>
+                                                    <input type='text' placeholder='Title....' onChange={() => setTitle(event.target.value)} className='w-full mt-2' />
+                                                </div>
                                             </div>
                                             <div>
-                                                <label>End Date</label>
-                                                <Datetime value={end} onChange={date => setEnd(date)} />
+                                                <label className='font-bold'>Start Date</label>
+                                                <Datetime value={start} onChange={date => setStart(date)} className='w-full mt-2' />
+                                            </div>
+                                            <div>
+                                                <label className='font-bold'>End Date</label>
+                                                <Datetime value={end} onChange={date => setEnd(date)} className='w-full mt-2' />
                                             </div>
                                             <button className='px-5 py-2 bg-green-700 text-white hover:text-black w-full rounded'>Add Event</button>
                                         </form>

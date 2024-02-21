@@ -1,5 +1,10 @@
-
-.fc-media-screen{
-    width: 100%;
-    height: 100vh;
+.fc-daygrid-day-events, .fc-daygrid-day-top{
+    font-size: 18px;
 }
+.form-control{
+    width: 100%;
+}
+/* .fc-daygrid-day-frame, .fc-scrollgrid-sync-inner{
+    background-color: blueviolet;
+    color: white;
+} */
